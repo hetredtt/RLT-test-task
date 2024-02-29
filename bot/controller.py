@@ -21,6 +21,7 @@ async def message_json(message: types.Message):
             json_data = json.loads(message.text)
             logger.info(f"User {message.chat.id} JSON {json_data}")
             api_response = await send_json_to_api(json_data)
+            api_response = json.dumps(api_response)
             await message.reply(f"{api_response}")
         except json.JSONDecodeError:
             await message.reply("Ошибка: Неверный формат JSON.")
